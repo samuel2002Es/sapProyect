@@ -1,0 +1,191 @@
+<template>
+  <div class="q-pa-md">
+    <div class="q-gutter-md">
+      <q-carousel
+        v-model="slide"
+        v-model:fullscreen="fullscreen"
+        transition-prev="scale"
+        transition-next="scale"
+        swipeable
+        animated
+        control-color="white"
+        navigation
+        padding
+        arrows
+        height="900px"
+        class="bg-primary text-white shadow-1 rounded-borders"
+      >
+        <q-carousel-slide
+          :name="1"
+          img-src="src/assets/newMembers/Slide1.JPG"
+        />
+        <q-carousel-slide
+          :name="2"
+          img-src="src/assets/newMembers/Slide2.JPG"
+        />
+        <q-carousel-slide
+          :name="3"
+          img-src="src/assets/newMembers/Slide3.JPG"
+        />
+        <q-carousel-slide
+          :name="4"
+          img-src="src/assets/newMembers/Slide4.JPG"
+        />
+        <q-carousel-slide
+          :name="5"
+          img-src="src/assets/newMembers/Slide5.JPG"
+        />
+        <q-carousel-slide
+          :name="6"
+          img-src="src/assets/newMembers/Slide6.JPG"
+        />
+        <q-carousel-slide
+          :name="7"
+          img-src="src/assets/newMembers/Slide7.JPG"
+        />
+        <q-carousel-slide
+          :name="8"
+          img-src="src/assets/newMembers/Slide8.JPG"
+        />
+        <q-carousel-slide
+          :name="9"
+          img-src="src/assets/newMembers/Slide9.JPG"
+        />
+        <q-carousel-slide
+          :name="10"
+          img-src="src/assets/newMembers/Slide10.JPG"
+        />
+        <q-carousel-slide
+          :name="11"
+          img-src="src/assets/newMembers/Slide11.JPG"
+        />
+        <q-carousel-slide
+          :name="12"
+          img-src="src/assets/newMembers/Slide12.JPG"
+        />
+        <q-carousel-slide
+          :name="13"
+          img-src="src/assets/newMembers/Slide13.JPG"
+        />
+        <q-carousel-slide
+          :name="14"
+          img-src="src/assets/newMembers/Slide14.JPG"
+        />
+        <q-carousel-slide
+          :name="15"
+          img-src="src/assets/newMembers/Slide15.JPG"
+        />
+        <q-carousel-slide
+          :name="16"
+          img-src="src/assets/newMembers/Slide16.JPG"
+        />
+        <q-carousel-slide
+          :name="17"
+          img-src="src/assets/newMembers/Slide17.JPG"
+        />
+        <q-carousel-slide
+          :name="18"
+          img-src="src/assets/newMembers/Slide18.JPG"
+        />
+        <q-carousel-slide
+          :name="19"
+          img-src="src/assets/newMembers/Slide19.JPG"
+        />
+        <q-carousel-slide
+          :name="20"
+          img-src="src/assets/newMembers/Slide20.JPG"
+        />
+        <q-carousel-slide
+          :name="21"
+          img-src="src/assets/newMembers/Slide21.JPG"
+        />
+        <q-carousel-slide
+          :name="22"
+          img-src="src/assets/newMembers/Slide22.JPG"
+        />
+        <q-carousel-slide
+          :name="23"
+          img-src="src/assets/newMembers/Slide23.JPG"
+        />
+        <q-carousel-slide
+          :name="24"
+          img-src="src/assets/newMembers/Slide24.JPG"
+        />
+        <q-carousel-slide
+          :name="25"
+          img-src="src/assets/newMembers/Slide25.JPG"
+        />
+        <q-carousel-slide
+          :name="26"
+          img-src="src/assets/newMembers/Slide26.JPG"
+        />
+        <q-carousel-slide
+          :name="27"
+          img-src="src/assets/newMembers/Slide27.JPG"
+        />
+        <q-carousel-slide
+          :name="28"
+          img-src="src/assets/newMembers/Slide28.JPG"
+        />
+        <q-carousel-slide
+          :name="29"
+          img-src="src/assets/newMembers/Slide29.JPG"
+        />
+        <q-carousel-slide
+          :name="30"
+          img-src="src/assets/newMembers/Slide30.JPG"
+        />
+        <q-carousel-slide
+          :name="31"
+          img-src="src/assets/newMembers/Slide31.JPG"
+        />
+        <q-carousel-slide
+          :name="32"
+          img-src="src/assets/newMembers/Slide32.JPG"
+        />
+        <q-carousel-slide
+          :name="33"
+          img-src="src/assets/newMembers/Slide33.JPG"
+        />
+        <q-carousel-slide
+          :name="34"
+          img-src="src/assets/newMembers/Slide34.JPG"
+        />
+        <q-carousel-slide
+          :name="35"
+          img-src="src/assets/newMembers/Slide35.JPG"
+        />
+        <q-carousel-slide
+          :name="36"
+          img-src="src/assets/newMembers/Slide36.JPG"
+        />
+        <template v-slot:control>
+          <q-carousel-control position="bottom-right" :offset="[18, 18]">
+            <q-btn
+              push
+              round
+              dense
+              color="white"
+              text-color="primary"
+              :icon="fullscreen ? 'fullscreen_exit' : 'fullscreen'"
+              @click="fullscreen = !fullscreen"
+            />
+          </q-carousel-control>
+        </template>
+      </q-carousel>
+    </div>
+  </div>
+</template>
+
+<script>
+import { ref } from "vue";
+
+export default {
+  setup() {
+    return {
+      slide: ref(1),
+      fullscreen: ref(false),
+    };
+  },
+};
+</script>
