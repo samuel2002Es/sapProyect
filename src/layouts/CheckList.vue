@@ -1,6 +1,6 @@
 <template>
   <div>
-    Hola señores aqui va un checklist en el cual tendra la posibilidad de establecer el tipo de checklist, marcar facil.
+   va un checklist en el cual tendra la posibilidad de establecer el tipo de checklist, marcar facil.
     region
     category
     volumen

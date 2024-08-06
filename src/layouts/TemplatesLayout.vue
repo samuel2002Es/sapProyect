@@ -2,7 +2,7 @@
   <div class="q-pa-md row items-start q-gutter-md">
     <q-card class="my-card" flat bordered v-for="item in templates" :key="item">
       <q-card-section @click="store.copyTextToClipboard(item.texto)">
-        <div class="text-h5 q-mt-sm q-mb-xs text-center">{{ item.titulo }}</div>
+        <div class="text-h7 q-mt-sm q-mb-xs text-center">{{ item.titulo }}</div>
       </q-card-section>
       <q-card-actions>
         <q-space />
@@ -19,7 +19,7 @@
         <div v-show="item.expanded">
           <q-separator />
           <q-card-section
-            class="text-subtitle2"
+            class="text-h9"
             :style="{ whiteSpace: 'pre-line' }"
           >
             {{ item.texto }}
@@ -31,8 +31,8 @@
 </template>
 <style lang="sass" scoped>
 .my-card
-  width: 40%
-  max-width: 500px
+  width: 20%
+  max-width: 300px
 </style>
 <script setup>
 import { ref, computed, onMounted, inject, watch } from "vue";
@@ -83,8 +83,10 @@ As we haven't heard from you since our last update, please be informed that we a
 Please open a new ticket if you have any other concerns, or reopen this ticket if you want us to follow up with this request.
 As always, we are more than happy to assist you.
 
-Best regards,
-Samuel`,
+Thanks
+[name]
+Data services Bureau
+IDM Data Operations Excellence`,
   },
   {
     expanded: false,
@@ -100,13 +102,42 @@ Please keep in mind that for Compliance purposes, screenshots, company website o
   },
   {
     expanded: false,
+    titulo: "Accepted documents",
+    texto: `
+Accepted supporting documents:
+•Link to local government authority websites or registry confirming requested details.
+•Legally valid documentation (such as Corporate Incorporation Certificate).
+•Tax certificates/government certificate.
+Please keep in mind that for Compliance purposes, screenshots, company website or any customer mail are not considered as valid supporting document.
+`,
+  },
+  {
+    expanded: false,
+    titulo: "Follow up",
+    texto: `
+Hi 
+
+Hope you are doing well 
+
+Do you have any update?
+
+Thanks
+[name]
+Data services Bureau
+IDM Data Operations Excellence
+`,
+  },
+  {
+    expanded: false,
     titulo: "Forwarded",
     texto: `Dear Colleague,
 Please look into below requestor requirement and kindly extend your support.
 Reason for Handover: Out of Scope from DSB
 Close or Return Ticket: Notify the user after changes are done then close the ticket (change if necessary)
-Regards,
-Data – DSB Team
+Thanks
+[name]
+Data services Bureau
+IDM Data Operations Excellence
 `,
   },
   {
@@ -204,5 +235,23 @@ IDM Data Operations Excellence`,
     titulo: "Reopened Duplicate BP",
     texto: `Reopened due to Duplicate BP`,
   },
+  {
+    expanded: false,
+    titulo: "Internal Account",
+    texto: `Unfortunately we, the data management team, are not authorized to make any changes   on   such   SAP   internal   accounts.   Please   enter   your   ticket   requests   in FINANCE direct here
+https://fiorilaunchpad-sapitcloud.dispatcher.hana.ondemand.com/sites#Help-Inbox&/create/ZFAR/ZFAR_CFR/null/03/null/null/null)`,
+  },
+  {
+    expanded: false,
+    titulo: "Change email account level",
+    texto: `Email at account level is not possible to be maintained any longer (for a couple of years now) – it was agreed long ago and is in the backlog to completely remove this field from the system for a couple of reasons –
+1) Email at company level is rarely used – only emails at contact level really make any sense
+2) and more importantly – there are GDPR issues as frequently there are personal email addresses in this field, although maintained at company level, is actually for a person working at the company and this is a breach of GDPR as this should only be maintained at contact relationship level.
+ 
+At company level we have another form of communication e.g. Telephone or Website – until this is done the field remains but is not open for editing, it should not be used in any business processes any longer.
+ 
+We are closing this ticket here and for any further doubt on this, please reach out to our colleague Jacqui Gilmore (I023854`,
+  },
+
 ]);
 </script>

@@ -48,7 +48,11 @@ import { notes } from "../database/notes.js";
 
 const editor = ref("");
 const $q = useQuasar();
-const tasks = ref([]);
+const tasks = ref([
+{texto: "AQ01SYSTQV000781ZJG_AO_SEL====",
+estado: false
+}
+]);
 
 onMounted(async () => {
   await getNotes();
