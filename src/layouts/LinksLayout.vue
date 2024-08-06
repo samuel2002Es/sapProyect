@@ -1,8 +1,17 @@
 <template>
   <div class="q-ma-md">
     <section>
-      <div class="q-pa-md text-center row">
-        <p class="col text-h5">Tickets basicos</p>
+      <div class="q-pt-md text-center row">
+        <p class="col text-h6">My links</p>
+        <q-btn flat color="blue" @click="promptMy = !promptMY">New</q-btn>
+      </div>
+      <div class="q-gutter-xl row">
+        <LinkFormat v-for="link in Myowns" :key="link.title" v-bind="link" />
+      </div>
+    </section>
+    <section>
+      <div class="q-pt-md text-center row">
+        <p class="col text-h6">Tickets basicos</p>
         <q-btn flat color="blue" @click="promptBasic = !promptBasic">New</q-btn>
       </div>
       <div class="q-gutter-xl row">
@@ -10,23 +19,14 @@
       </div>
     </section>
     <section>
-      <div class="q-pa-md text-center row">
-        <p class="col text-h5">Links videos</p>
+      <div class="q-pt-md text-center row">
+        <p class="col text-h6">Links videos</p>
         <q-btn flat color="blue" @click="promptVideos = !promptVideos"
           >New</q-btn
         >
       </div>
       <div class="q-gutter-xl row">
         <LinkFormat v-for="link in videos" :key="link.title" v-bind="link" />
-      </div>
-    </section>
-    <section>
-      <div class="q-pa-md text-center row">
-        <p class="col text-h5">My links</p>
-        <q-btn flat color="blue" @click="promptMy = !promptMY">New</q-btn>
-      </div>
-      <div class="q-gutter-xl row">
-        <LinkFormat v-for="link in Myowns" :key="link.title" v-bind="link" />
       </div>
     </section>
   </div>
