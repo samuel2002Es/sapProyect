@@ -59,7 +59,7 @@ export const useCounterStore = defineStore("counter", () => {
       // Puedes agregar aquí lógica adicional, como mostrar un mensaje de éxito
       $q.notify({
         type: "positive",
-        message: "Texto copiado al portapapeles",
+        message: "Text copied to clipboard",
       });
     } catch (error) {
       console.error("Error al copiar texto al portapapeles:", error);
