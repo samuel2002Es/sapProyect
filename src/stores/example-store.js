@@ -49,8 +49,8 @@ export const useCounterStore = defineStore("counter", () => {
       "Territory Management",
       "ZEIDOS",
     ],
-    ReceivedEstatus: ["", "2", "3", "4", "5", "6"],
-    FinalEstatus: ["new", "author", "solution", "4", "5", "6"],
+    ReceivedEstatus: ["New", "Forwarded", "Reopened", "Answer Received"],
+    FinalEstatus: ["Author Action", "Forwarded", "Solution Provided", "On Hold","In Process","Forwarded to IT","Closed by Followings"],
   });
   async function copyTextToClipboard(texto) {
     try {
