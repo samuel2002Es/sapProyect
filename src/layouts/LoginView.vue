@@ -9,6 +9,7 @@
       class="q-gutter-md"
       style="width: 300px"
     >
+      <div class="text-center">{{ acceder ? "Login" : "Registration" }}</div>
       <q-input
         ref="emailRef"
         type="email"
@@ -39,6 +40,22 @@
       <div>
         <q-btn label="Submit" type="submit" color="primary" />
         <q-btn
+          v-if="!acceder"
+          label="I have an account"
+          color="primary"
+          outline
+          class="q-ml-sm"
+          @click="acceder = true"
+        />
+        <q-btn
+          v-if="acceder"
+          label="I don't have an account"
+          color="negative"
+          outline
+          class="q-ml-sm"
+          @click="acceder = false"
+        />
+        <q-btn
           label="Reset"
           type="reset"
           color="primary"
@@ -55,10 +72,16 @@ import { db } from "../database/db";
 import { useQuasar } from "quasar";
 import { ref } from "vue";
 import { useRouter } from "vue-router";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 
 export default {
   setup() {
+    const acceder = ref(true);
+
     const router = useRouter();
     const $q = useQuasar();
 
@@ -72,6 +95,7 @@ export default {
     const cnumberRef = ref(null);
 
     return {
+      acceder,
       email,
       emailRef,
       name,
@@ -97,13 +121,15 @@ export default {
             message: "We have a problem to submit your data. Please try again",
           });
         } else {
-          try {
+          if (acceder.value == false) {
+            //registro
             createUserWithEmailAndPassword(
               getAuth(),
               email.value,
               cnumber.value
             )
               .then((data) => {
+                console.log("mirar si funciona", data);
                 $q.notify({
                   icon: "done",
                   color: "positive",
@@ -120,24 +146,39 @@ export default {
                   icon: "done",
                   color: "negative",
                   message:
-                    "We have a problem to submit your data. Please try again",
+                    "We have a problem to submit your data. Please try again creation problem ",
                 });
               });
-            // $q.notify({
-            //   icon: "done",
-            //   color: "positive",
-            //   message: "Submitted",
-            // });
             setTimeout(() => {
               router.push({ name: "index" });
             }, 2000);
-          } catch (error) {
-            $q.notify({
-              icon: "done",
-              color: "negative",
-              message:
-                "We have a problem to submit your data. Please try again",
-            });
+          } else {
+            //login
+            signInWithEmailAndPassword(getAuth(), email.value, cnumber.value)
+              .then((data) => {
+                console.log("mirar si funciona", data);
+                $q.notify({
+                  icon: "done",
+                  color: "positive",
+                  message: "Submitted",
+                });
+                db.user.add({
+                  nameUser: name.value,
+                  Cnumber: cnumber.value,
+                });
+              })
+              .catch((error) => {
+                console.log(error.code);
+                $q.notify({
+                  icon: "done",
+                  color: "negative",
+                  message:
+                    "We have a problem to submit your data. Please try again login problem ",
+                });
+              });
+            setTimeout(() => {
+              router.push({ name: "index" });
+            }, 2000);
           }
         }
       },
