@@ -13,9 +13,13 @@ const firebaseConfig = {
   storageBucket: "trackersap-acabc.appspot.com",
   messagingSenderId: "440639161701",
   appId: "1:440639161701:web:671e4f2fae47c44b40cd8c",
-  measurementId: "G-8R4366C47V"
+  measurementId: "G-8R4366C47V",
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
+
+const db = firebase.firestore();
+const marcaDeTiempo = firebase.firestore.fieldValue.serverTimesTamp;
+export { db, marcaDeTiempo };

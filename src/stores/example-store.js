@@ -7,8 +7,9 @@ import { users } from "../database/users";
 
 export const useCounterStore = defineStore("counter", () => {
   const $q = useQuasar();
+  const user = ref(null);
   const counter = ref([{ name: "prueba" }]);
-  const nombre = ref('')
+  const nombre = ref("");
   const data = ref([]);
   const ticketsData = ref({
     Workflow: ["SSF", "MDG", "SAP STORES"],
@@ -50,7 +51,15 @@ export const useCounterStore = defineStore("counter", () => {
       "ZEIDOS",
     ],
     ReceivedEstatus: ["New", "Forwarded", "Reopened", "Answer Received"],
-    FinalEstatus: ["Author Action", "Forwarded", "Solution Provided", "On Hold","In Process","Forwarded to IT","Closed by Followings"],
+    FinalEstatus: [
+      "Author Action",
+      "Forwarded",
+      "Solution Provided",
+      "On Hold",
+      "In Process",
+      "Forwarded to IT",
+      "Closed by Followings",
+    ],
   });
   async function copyTextToClipboard(texto) {
     try {
@@ -81,9 +90,9 @@ export const useCounterStore = defineStore("counter", () => {
       .getInstance()
       .get()
       .then((result) => {
-        console.log('sam', result[0]);
-        nombre.value = result[0].nameUser
-      })
+        console.log("sam", result[0]);
+        nombre.value = result[0].nameUser;
+      });
   }
   onMounted(async () => {
     name();
@@ -112,7 +121,7 @@ export const useCounterStore = defineStore("counter", () => {
   const ticketsOutput = ref({
     ticketID: null,
     region: null,
-    name:nombre.value,
+    name: nombre.value,
     workflow: undefined,
     description: undefined,
     fecha_hoyi: "",
@@ -143,11 +152,12 @@ export const useCounterStore = defineStore("counter", () => {
       errorSPOC: ticket.errorSPOC,
       background: ticket.background,
       WhoDidQC: ticket.WhoDidQC,
-    })
-    await addingTable()
+    });
+    await addingTable();
     //se comenta con kc y se descomenta con ku
   }
   return {
+    user,
     nombre,
     counter,
     data,

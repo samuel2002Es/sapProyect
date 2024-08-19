@@ -77,6 +77,8 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from "firebase/auth";
+import { useCounterStore } from "../stores/example-store";
+const store = useCounterStore();
 
 export default {
   setup() {
@@ -130,6 +132,7 @@ export default {
             )
               .then((data) => {
                 console.log("mirar si funciona", data);
+                store.user = data;
                 $q.notify({
                   icon: "done",
                   color: "positive",
@@ -157,6 +160,7 @@ export default {
             signInWithEmailAndPassword(getAuth(), email.value, cnumber.value)
               .then((data) => {
                 console.log("mirar si funciona", data);
+                store.user = data;
                 $q.notify({
                   icon: "done",
                   color: "positive",

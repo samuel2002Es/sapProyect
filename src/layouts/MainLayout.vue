@@ -12,7 +12,7 @@
         />
 
         <q-toolbar-title> SAP Tracker </q-toolbar-title>
-
+        <!-- {{ store.user }} -->
         <div class="q-mr-md">Welcome</div>
         <div class="q-gutter-md flex justify-end">
           <q-btn outline rounded color="white" label="start Day" type="reset" />
