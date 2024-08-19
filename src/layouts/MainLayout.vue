@@ -13,7 +13,11 @@
 
         <q-toolbar-title> SAP Tracker </q-toolbar-title>
 
-        <div>by Samuel Espinoza</div>
+        <div class="q-mr-md">Welcome</div>
+        <div class="q-gutter-md flex justify-end">
+          <q-btn outline rounded color="white" label="start Day" type="reset" />
+          <q-btn outline rounded color="white" label="End Day" type="submit" />
+        </div>
       </q-toolbar>
     </q-header>
 
@@ -24,6 +28,12 @@
           :key="link.title"
           v-bind="link"
         />
+        <q-item clickable tag="a" exact v-ripple to="/auth">
+          <q-item-section>
+            <q-item-label>SignOut</q-item-label>
+            <q-item-label caption>SignOut</q-item-label>
+          </q-item-section>
+        </q-item>
       </q-list>
     </q-drawer>
 
