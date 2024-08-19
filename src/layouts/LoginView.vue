@@ -13,7 +13,7 @@
         ref="emailRef"
         type="email"
         filled
-        v-model="Email"
+        v-model="email"
         label="Your Email "
         hint="Email"
         lazy-rules
@@ -98,12 +98,20 @@ export default {
           });
         } else {
           try {
-            createUserWithEmailAndPassword(getAuth(), email.value, name.value)
+            createUserWithEmailAndPassword(
+              getAuth(),
+              email.value,
+              cnumber.value
+            )
               .then((data) => {
                 $q.notify({
                   icon: "done",
                   color: "positive",
                   message: "Submitted",
+                });
+                db.user.add({
+                  nameUser: name.value,
+                  Cnumber: cnumber.value,
                 });
               })
               .catch((error) => {
@@ -115,10 +123,6 @@ export default {
                     "We have a problem to submit your data. Please try again",
                 });
               });
-            // db.user.add({
-            //   nameUser: name.value,
-            //   Cnumber: cnumber.value,
-            // });
             // $q.notify({
             //   icon: "done",
             //   color: "positive",
@@ -141,6 +145,7 @@ export default {
       onReset() {
         name.value = null;
         cnumber.value = null;
+        email.value = null;
 
         nameRef.value.resetValidation();
         cnumberRef.value.resetValidation();
