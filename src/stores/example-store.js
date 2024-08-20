@@ -4,6 +4,7 @@ import { tickets } from "../database/tickets";
 import { dblocal } from "../database/db";
 import { useQuasar } from "quasar";
 import { users } from "../database/users";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 export const useCounterStore = defineStore("counter", () => {
   const $q = useQuasar();
@@ -95,6 +96,8 @@ export const useCounterStore = defineStore("counter", () => {
       });
   }
   onMounted(async () => {
+    user.value = getAuth().currentUser;
+    console.log("el user is", user.value.email);
     name();
     getToday();
     //console.log("Hello world");
@@ -167,5 +170,6 @@ export const useCounterStore = defineStore("counter", () => {
     getTable,
     loading,
     copyTextToClipboard,
+    getToday,
   };
 });

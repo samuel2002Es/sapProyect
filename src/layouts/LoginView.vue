@@ -134,7 +134,6 @@ export default {
               cnumber.value
             )
               .then(async (data) => {
-                console.log("mirar si funciona", data);
                 store.user = data;
                 $q.notify({
                   icon: "done",
@@ -143,11 +142,14 @@ export default {
                 });
                 //base de datos en firebase add doc
                 try {
+                  console.log(data);
                   const docRef = await addDoc(collection(db, "users"), {
-                    first: "Ada",
-                    last: "Lovelace",
-                    born: 1815,
+                    name: name.value,
+                    cnumber: cnumber.value,
+                    email: email.value,
+                    uid: data.user.uid,
                   });
+
                   console.log("Document written with ID: ", docRef.id);
                 } catch (e) {
                   console.error("Error adding document: ", e);
@@ -173,8 +175,9 @@ export default {
             //login
             signInWithEmailAndPassword(getAuth(), email.value, cnumber.value)
               .then(async (data) => {
-                console.log("mirar si funciona", data);
-                store.user = data;
+                //console.log("mirar si funciona", data);
+                store.user = data.user;
+                console.log("info de user", data.user.uid);
                 $q.notify({
                   icon: "done",
                   color: "positive",
