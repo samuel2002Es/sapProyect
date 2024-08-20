@@ -82,11 +82,11 @@ router.beforeEach(async (to, from, next) => {
       /* const {data} = await AuthAPI.auth()
       console.log(data) */
       console.log(getAuth().currentUser);
-      if (await getCurrentUser) {
-        //console.log("samuel es un genio y este es el user");
+      if (await getCurrentUser()) {
+        console.log("samuel es un genio y este es el user");
         next();
       } else {
-        //console.log("aqui debera retornar al login");
+        console.log("aqui debera retornar al login");
         next({
           name: "auth",
         });

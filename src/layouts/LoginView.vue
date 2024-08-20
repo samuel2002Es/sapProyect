@@ -79,6 +79,7 @@ import {
 } from "firebase/auth";
 import { useCounterStore } from "../stores/example-store";
 import { collection, addDoc } from "firebase/firestore";
+import { db } from "src/boot/firebase";
 
 const store = useCounterStore();
 
@@ -141,17 +142,16 @@ export default {
                   message: "Submitted",
                 });
                 //base de datos en firebase add doc
-                // try {
-                //   const docRef = await addDoc(collection(db, "users"), {
-                //     first: "Ada",
-                //     last: "Lovelace",
-                //     born: 1815,
-                //   });
-                //   console.log("Document written with ID: ", docRef.id);
-                // } catch (e) {
-                //   console.error("Error adding document: ", e);
-                // }
-
+                try {
+                  const docRef = await addDoc(collection(db, "users"), {
+                    first: "Ada",
+                    last: "Lovelace",
+                    born: 1815,
+                  });
+                  console.log("Document written with ID: ", docRef.id);
+                } catch (e) {
+                  console.error("Error adding document: ", e);
+                }
                 dblocal.user.add({
                   nameUser: name.value,
                   Cnumber: cnumber.value,
@@ -172,7 +172,7 @@ export default {
           } else {
             //login
             signInWithEmailAndPassword(getAuth(), email.value, cnumber.value)
-              .then((data) => {
+              .then(async (data) => {
                 console.log("mirar si funciona", data);
                 store.user = data;
                 $q.notify({
@@ -180,6 +180,7 @@ export default {
                   color: "positive",
                   message: "Submitted",
                 });
+
                 dblocal.user.add({
                   nameUser: name.value,
                   Cnumber: cnumber.value,
