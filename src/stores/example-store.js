@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 import { ref, computed, onMounted, inject, watch } from "vue";
 import { tickets } from "../database/tickets";
-import { db } from "../database/db";
+import { dblocal } from "../database/db";
 import { useQuasar } from "quasar";
 import { users } from "../database/users";
 
@@ -134,7 +134,7 @@ export const useCounterStore = defineStore("counter", () => {
   async function save(ticket) {
     console.log("salvando");
     console.log(ticket);
-    db.tickets.add({
+    dblocal.tickets.add({
       idTicket: ticket.ticketID,
       region: ticket.region,
       Employee: nombre.value,

@@ -68,7 +68,7 @@
 </template>
 
 <script>
-import { db } from "../database/db";
+import { dblocal } from "../database/db";
 import { useQuasar } from "quasar";
 import { ref } from "vue";
 import { useRouter } from "vue-router";
@@ -152,7 +152,7 @@ export default {
                 //   console.error("Error adding document: ", e);
                 // }
 
-                db.user.add({
+                dblocal.user.add({
                   nameUser: name.value,
                   Cnumber: cnumber.value,
                 });
@@ -180,7 +180,7 @@ export default {
                   color: "positive",
                   message: "Submitted",
                 });
-                db.user.add({
+                dblocal.user.add({
                   nameUser: name.value,
                   Cnumber: cnumber.value,
                 });

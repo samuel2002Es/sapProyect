@@ -178,7 +178,7 @@
 <script setup>
 import { useQuasar } from "quasar";
 import { ref, onMounted } from "vue";
-import { db } from "../database/db";
+import { dblocal } from "../database/db";
 import { linksDB } from "../database/links.js";
 import LinkFormat from "components/LinkFormat.vue";
 const promptBasic = ref(false);
@@ -217,7 +217,7 @@ function notificacion() {
 }
 function saveLink(type, title, link, description) {
   try {
-    db.linksDB.add({
+    dblocal.linksDB.add({
       title: title,
       type: type,
       link: link,

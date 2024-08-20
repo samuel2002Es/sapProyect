@@ -1,7 +1,7 @@
-import {db} from './db'
+import {dblocal} from './db'
 export class users {
     get(){
-        return db.user.toArray();
+        return dblocal.user.toArray();
     }
     static getInstance(){
         return new users();

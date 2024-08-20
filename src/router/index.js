@@ -83,10 +83,10 @@ router.beforeEach(async (to, from, next) => {
       console.log(data) */
       console.log(getAuth().currentUser);
       if (await getCurrentUser) {
-        console.log("samuel es un genio y este es el user");
+        //console.log("samuel es un genio y este es el user");
         next();
       } else {
-        console.log("aqui debera retornar al login");
+        //console.log("aqui debera retornar al login");
         next({
           name: "auth",
         });

@@ -43,7 +43,7 @@
 <script setup>
 import { useQuasar } from "quasar";
 import { ref, onMounted } from "vue";
-import { db } from "../database/db";
+import { dblocal } from "../database/db";
 import { notes } from "../database/notes.js";
 
 const editor = ref("");
@@ -77,7 +77,7 @@ function saveWork() {
     texto: editor.value,
     estado: false,
   });
-  db.notes.add({
+  dblocal.notes.add({
     note: editor.value,
   });
   $q.notify({
@@ -96,7 +96,7 @@ function eliminar(index, item) {
     .onOk(() => {
       // console.log('>>>> OK')
       tasks.value.splice(index, 1);
-      db.notes.delete(item.id);
+      dblocal.notes.delete(item.id);
     })
     .onOk(() => {
       // console.log('>>>> second OK catcher')

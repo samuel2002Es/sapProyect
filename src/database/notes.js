@@ -1,7 +1,7 @@
-import { db } from "./db";
+import { dblocal } from "./db";
 export class notes {
   get() {
-    return db.notes.toArray();
+    return dblocal.notes.toArray();
   }
   static getInstance() {
     return new notes();

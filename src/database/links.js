@@ -1,7 +1,7 @@
-import { db } from "./db";
+import { dblocal } from "./db";
 export class linksDB {
   get() {
-    return db.linksDB.toArray();
+    return dblocal.linksDB.toArray();
   }
   static getInstance() {
     return new linksDB();
