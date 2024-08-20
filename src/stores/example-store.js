@@ -97,10 +97,8 @@ export const useCounterStore = defineStore("counter", () => {
   }
   onMounted(async () => {
     user.value = getAuth().currentUser;
-    console.log("el user is", user.value.email);
     name();
     getToday();
-    //console.log("Hello world");
     await getTable();
   });
   async function getTable() {

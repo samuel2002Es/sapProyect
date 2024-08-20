@@ -14,8 +14,20 @@
         <q-toolbar-title> SAP Tracker </q-toolbar-title>
         <div class="q-mr-md">Welcome</div>
         <div class="q-gutter-md flex justify-end">
-          <q-btn outline rounded color="white" label="start Day" type="reset" />
-          <q-btn outline rounded color="white" label="End Day" type="submit" />
+          <q-btn
+            outline
+            rounded
+            color="white"
+            label="start Day"
+            @click="startday()"
+          />
+          <q-btn
+            outline
+            rounded
+            color="white"
+            label="End Day"
+            @click="endday()"
+          />
         </div>
       </q-toolbar>
     </q-header>
@@ -54,7 +66,11 @@ const store = useCounterStore();
 
 import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 const isLoggedin = ref(false);
+import { doc, setDoc } from "firebase/firestore";
+import { db } from "src/boot/firebase";
+import { useQuasar } from "quasar";
 
+const $q = useQuasar();
 let auth;
 onMounted(() => {
   auth = getAuth();
@@ -69,6 +85,63 @@ onMounted(() => {
 defineOptions({
   name: "MainLayout",
 });
+function getToday() {
+  const today = new Date();
+  //checar si esto funciona
+  const month = String(today.getMonth() + 1).padStart(2, "0");
+  ticketsOutput.value.fecha_hoyf = `${
+    today.getFullYear() + 1
+  }-${month}-${today.getDate()}`;
+  ticketsOutput.value.fecha_hoyi = `${
+    today.getFullYear() + 1
+  }-${month}-${today.getDate()}`;
+}
+const startday = async () => {
+  // Add a new document in collection "cities"
+  try {
+    await setDoc(doc(db, "WorkDays", "month", "8-20-2024", store.user.uid), {
+      email: store.user.email,
+      user: store.user.uid,
+      initialTime: "CA",
+      finalTime: null,
+    }).then(() => {
+      $q.notify({
+        icon: "done",
+        color: "positive",
+        message: "Have an excellent day of work",
+      });
+    });
+  } catch (error) {
+    console.log(error);
+    $q.notify({
+      icon: "done",
+      color: "negative",
+      message: error,
+    });
+  }
+};
+const endday = async () => {
+  try {
+    await setDoc(doc(db, "WorkDays", "8/20/2024"), {
+      email: store.user.email,
+      user: store.user.uid,
+      initialTime: "CA",
+      finalTime: "something",
+    }).then(() => {
+      $q.notify({
+        icon: "done",
+        color: "positive",
+        message: "Have an excellent day of work",
+      });
+    });
+  } catch (error) {
+    q.notify({
+      icon: "done",
+      color: "negative",
+      message: error,
+    });
+  }
+};
 const handleSignOut = () => {
   signOut(auth).then(() => {
     router.push("/auth");
