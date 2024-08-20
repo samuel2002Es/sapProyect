@@ -28,12 +28,13 @@
           :key="link.title"
           v-bind="link"
         />
-        <q-item clickable tag="a" exact v-ripple to="/auth">
-          <q-item-section>
-            <q-item-label>SignOut</q-item-label>
-            <q-item-label caption>SignOut</q-item-label>
-          </q-item-section>
-        </q-item>
+        <q-btn
+          label="SignOut"
+          color="negative"
+          outline
+          class="q-ml-sm"
+          @click="handleSignOut"
+        />
       </q-list>
     </q-drawer>
 
@@ -44,16 +45,36 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import EssentialLink from "components/EssentialLink.vue";
+import { useRouter } from "vue-router";
+const router = useRouter();
 
 import { useCounterStore } from "../stores/example-store";
 const store = useCounterStore();
 
+import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
+const isLoggedin = ref(false);
+
+let auth;
+onMounted(() => {
+  auth = getAuth();
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      isLoggedin.value = true;
+    } else {
+      isLoggedin.value = false;
+    }
+  });
+});
 defineOptions({
   name: "MainLayout",
 });
-
+const handleSignOut = () => {
+  signOut(auth).then(() => {
+    router.push("/auth");
+  });
+};
 const linksList = [
   {
     title: "Tracker",
