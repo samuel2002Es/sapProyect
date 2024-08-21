@@ -66,7 +66,7 @@ const store = useCounterStore();
 
 import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 const isLoggedin = ref(false);
-import { doc, setDoc } from "firebase/firestore";
+import { doc, setDoc, updateDoc } from "firebase/firestore";
 import { db } from "src/boot/firebase";
 import { useQuasar } from "quasar";
 
@@ -87,22 +87,41 @@ defineOptions({
 });
 function getToday() {
   const today = new Date();
-  //checar si esto funciona
   const month = String(today.getMonth() + 1).padStart(2, "0");
-  ticketsOutput.value.fecha_hoyf = `${
-    today.getFullYear() + 1
-  }-${month}-${today.getDate()}`;
-  ticketsOutput.value.fecha_hoyi = `${
-    today.getFullYear() + 1
-  }-${month}-${today.getDate()}`;
+  return `${today.getFullYear() + 1}-${month}-${today.getDate()}`;
+}
+function getMonth() {
+  const month = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+
+  const d = new Date();
+  return month[d.getMonth()];
+}
+function getTime() {
+  const today = new Date();
+  //checar si esto funciona
+  return today;
 }
 const startday = async () => {
   // Add a new document in collection "cities"
+  //console.log(getTime());
   try {
-    await setDoc(doc(db, "WorkDays", "month", "8-20-2024", store.user.uid), {
+    await setDoc(doc(db, "WorkDays", getMonth(), getToday(), store.user.uid), {
       email: store.user.email,
       user: store.user.uid,
-      initialTime: "CA",
+      initialTime: getTime(),
       finalTime: null,
     }).then(() => {
       $q.notify({
@@ -122,12 +141,12 @@ const startday = async () => {
 };
 const endday = async () => {
   try {
-    await setDoc(doc(db, "WorkDays", "8/20/2024"), {
-      email: store.user.email,
-      user: store.user.uid,
-      initialTime: "CA",
-      finalTime: "something",
-    }).then(() => {
+    await updateDoc(
+      doc(db, "WorkDays", getMonth(), getToday(), store.user.uid),
+      {
+        finalTime: getTime(),
+      }
+    ).then(() => {
       $q.notify({
         icon: "done",
         color: "positive",
@@ -135,7 +154,8 @@ const endday = async () => {
       });
     });
   } catch (error) {
-    q.notify({
+    console.log(error);
+    $q.notify({
       icon: "done",
       color: "negative",
       message: error,
