@@ -141,6 +141,7 @@ const startday = async () => {
 };
 const endday = async () => {
   try {
+    //"workdays", getMonth(),
     await updateDoc(
       doc(db, "WorkDays", getMonth(), getToday(), store.user.uid),
       {
@@ -222,6 +223,12 @@ const linksList = [
     caption: "New Coworkers",
     icon: "code",
     link: "/newJoiners",
+  },
+  {
+    title: "Work Days",
+    caption: "The time worked by the team",
+    icon: "code",
+    link: "/workdays",
   },
 ];
 

@@ -42,6 +42,10 @@ const router = createRouter({
           path: "/newJoiners",
           component: () => import("layouts/NewJoiners.vue"),
         },
+        {
+          path: "/workdays",
+          component: () => import("layouts/WorkDays.vue"),
+        },
       ],
     },
     {
