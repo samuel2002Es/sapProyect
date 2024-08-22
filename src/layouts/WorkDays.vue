@@ -9,6 +9,11 @@ import { db } from "src/boot/firebase";
 onMounted(async () => {
   try {
     console.log("samuel");
+//     firestore.doc(`/myCollection/myDocument`).getCollections().then(collections => {
+//   for (let collection of collections) {
+//     console.log(`Found collection with id: ${collection.id}`);
+//   }
+// });
     ///WorkDays/August/2025-08-22
     //const querySnapshot = await getDocs(collection(db, "WorkDays", "MES", "FECHA"));
     //la collection
