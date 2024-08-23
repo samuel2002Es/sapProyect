@@ -1,30 +1,62 @@
 <template>
   <div class="q-pa-md">
     <div class="q-pb-sm">Model: {{ days }}</div>
-
+    <div class="text-center">{{ getMonth() }} - {{ getToday() }}</div>
     <q-date v-model="days" multiple />
   </div>
   <div class="q-pa-md">
-    <q-table
-      class="my-sticky-column-table"
-      flat
-      bordered
-      title="Work Days"
-      :rows="rows"
-      :columns="columns"
-      row-key="name"
-    />
+    <div v-if="!days">Kindly select a day!</div>
+    <div v-if="days">
+      <div v-for="(item, index) in days" :key="index">
+        {{ index }} {{ item }}
+        <q-table
+          class="my-sticky-column-table"
+          flat
+          bordered
+          title="Work Days"
+          :rows="rows"
+          :columns="columns"
+        />
+      </div>
+    </div>
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
+import { ref, onMounted, watch } from "vue";
 import { doc, getDocs, collection } from "firebase/firestore";
 import { db } from "src/boot/firebase";
-const days = ref(["2024/08/01", "2024/08/02"]);
+const days = ref([getToday()]);
+
+watch(days, () => {
+  console.log("selecciono algo nuevo");
+});
+function getToday() {
+  const today = new Date();
+  const month = String(today.getMonth() + 1).padStart(2, "0");
+  return `${today.getFullYear()}/${month}/${today.getDate()}`;
+}
+function getMonth() {
+  const month = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+
+  const d = new Date();
+  return month[d.getMonth()];
+}
 onMounted(async () => {
   try {
-    console.log("samuel");
     //     firestore.doc(`/myCollection/myDocument`).getCollections().then(collections => {
     //   for (let collection of collections) {
     //     console.log(`Found collection with id: ${collection.id}`);
@@ -33,7 +65,10 @@ onMounted(async () => {
     ///WorkDays/August/2025-08-22
     //const querySnapshot = await getDocs(collection(db, "WorkDays", "MES", "FECHA"));
     //la collection
-    const querySnapshot = await getDocs(collection(db, "WorkDays"));
+    const querySnapshot = await getDocs(
+      collection(db, getToday())
+    );
+    console.log("algo bien", querySnapshot);
     querySnapshot.forEach((doc) => {
       // doc.data() is never undefined for query doc snapshots
       console.log(doc.id, " => ", doc.data());

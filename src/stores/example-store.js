@@ -107,7 +107,7 @@ export const useCounterStore = defineStore("counter", () => {
       .get()
       .then((result) => {
         data.value = result;
-        console.log(result);
+        //console.log(result);
       });
   }
   const loading = ref(false);
