@@ -85,10 +85,10 @@ onMounted(() => {
 defineOptions({
   name: "MainLayout",
 });
-function getToday() {
+function getToday(format) {
   const today = new Date();
   const month = String(today.getMonth() + 1).padStart(2, "0");
-  return `${today.getFullYear() + 1}-${month}-${today.getDate()}`;
+  return `${today.getFullYear()}-${month}-${today.getDate()}`;
 }
 function getMonth() {
   const month = [
