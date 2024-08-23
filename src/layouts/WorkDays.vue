@@ -82,7 +82,7 @@ onMounted(async () => {
       let { email, initialTime, finalTime } = doc.data();
       initialTime = initialTime.toDate().toString();
       finalTime = finalTime.toDate().toString();
-      newRows.value.push([{ email, initialTime, finalTime }]);
+      newRows.value.push({ email, initialTime, finalTime });
     });
     console.log(newRows.value[0]);
   } catch (error) {
