@@ -7,7 +7,6 @@
     <div v-if="!days">Kindly select a day!</div>
     <div v-if="days">
       <div>
-        {{ newRows }}
         <q-table
           class="my-sticky-column-table"
           flat
