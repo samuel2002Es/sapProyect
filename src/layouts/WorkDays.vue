@@ -1,6 +1,5 @@
 <template>
   <div class="q-pa-md">
-    <div class="q-pb-sm">Model: {{ days }}</div>
     <div class="text-center">{{ getMonth() }} - {{ getToday(true) }}</div>
     <q-date v-model="days" multiple />
   </div>
