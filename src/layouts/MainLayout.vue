@@ -85,10 +85,10 @@ onMounted(() => {
 defineOptions({
   name: "MainLayout",
 });
-function getToday() {
+function getToday(format) {
   const today = new Date();
   const month = String(today.getMonth() + 1).padStart(2, "0");
-  return `${today.getFullYear() + 1}-${month}-${today.getDate()}`;
+  return `${today.getFullYear()}-${month}-${today.getDate()}`;
 }
 function getMonth() {
   const month = [
@@ -141,6 +141,7 @@ const startday = async () => {
 };
 const endday = async () => {
   try {
+    //"workdays", getMonth(),
     await updateDoc(
       doc(db, "WorkDays", getMonth(), getToday(), store.user.uid),
       {
@@ -222,6 +223,12 @@ const linksList = [
     caption: "New Coworkers",
     icon: "code",
     link: "/newJoiners",
+  },
+  {
+    title: "Work Days",
+    caption: "The time worked by the team",
+    icon: "code",
+    link: "/workdays",
   },
 ];
 

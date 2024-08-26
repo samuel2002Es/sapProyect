@@ -42,6 +42,10 @@ const router = createRouter({
           path: "/newJoiners",
           component: () => import("layouts/NewJoiners.vue"),
         },
+        {
+          path: "/workdays",
+          component: () => import("layouts/WorkDays.vue"),
+        },
       ],
     },
     {
@@ -81,12 +85,12 @@ router.beforeEach(async (to, from, next) => {
       //aqui con lo que esta comentado traemos la informacion del usuario, esto nos serviria el guardarlo en lo que es el estore, para presentarlo cuando sea necesario
       /* const {data} = await AuthAPI.auth()
       console.log(data) */
-      console.log(getAuth().currentUser);
+      //console.log(getAuth().currentUser);
       if (await getCurrentUser()) {
-        console.log("samuel es un genio y este es el user");
+        //console.log("samuel es un genio y este es el user");
         next();
       } else {
-        console.log("aqui debera retornar al login");
+        //console.log("aqui debera retornar al login");
         next({
           name: "auth",
         });
@@ -117,6 +121,6 @@ router.beforeEach(async (to, from, next) => {
   } else {
     next();
   }
-  console.log(requiresAuth);
+  //console.log(requiresAuth);
 });
 export default router;
