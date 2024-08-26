@@ -7,9 +7,8 @@
   <div class="q-pa-md">
     <div v-if="!days">Kindly select a day!</div>
     <div v-if="days">
-      <div v-for="(item, index) in days" :key="index">
-        {{ index }} {{ item }}
-        {{ newRows.length }}
+      <div>
+        {{ newRows }}
         <q-table
           class="my-sticky-column-table"
           flat
@@ -30,8 +29,46 @@ import { db } from "src/boot/firebase";
 const days = ref([getToday(true)]);
 const newRows = ref([]);
 let carros = [[{}], [{}]];
-watch(days, () => {
-  console.log("selecciono algo nuevo");
+watch(days, async () => {
+  //console.log("selecciono algo nuevo", days.value);
+  //arreglo = days.value.filter((i) => i !== getToday(true)); // filtramos
+  newRows.value = [];
+  const daysarray = Object.values(days.value);
+  for (let i = 0; i < daysarray.length; i++) {
+    let fechaFormatoNuevo = daysarray[i].replace(/\//g, "-");
+    let partesFecha = fechaFormatoNuevo.split("-");
+    let mesNumero = parseInt(partesFecha[1], 10);
+    let nombresMeses = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
+    let mesNombre = nombresMeses[mesNumero - 1];
+    console.log(mesNombre);
+    const querySnapshot = await getDocs(
+      collection(db, "WorkDays", mesNombre, fechaFormatoNuevo)
+    );
+    querySnapshot.forEach((doc) => {
+      console.log("informacion obtenida", doc.data());
+      let { email, initialTime, finalTime } = doc.data();
+      initialTime = initialTime.toDate().toString();
+      if (finalTime) {
+        finalTime = finalTime.toDate().toString();
+      } else {
+        finalTime = "In progess";
+      }
+      newRows.value.push({ email, initialTime, finalTime, day: daysarray[i] });
+    });
+  }
 });
 function getToday(format) {
   const today = new Date();
@@ -71,8 +108,9 @@ onMounted(async () => {
     ///WorkDays/August/2025-08-22
     //const querySnapshot = await getDocs(collection(db, "WorkDays", "MES", "FECHA"));
     //la collection
+    const day = getToday();
     const querySnapshot = await getDocs(
-      collection(db, "WorkDays", getMonth(), getToday())
+      collection(db, "WorkDays", getMonth(), day)
     );
     console.log("samuel espinoza", querySnapshot);
     querySnapshot.forEach((doc) => {
@@ -81,8 +119,13 @@ onMounted(async () => {
       console.log(doc.data());
       let { email, initialTime, finalTime } = doc.data();
       initialTime = initialTime.toDate().toString();
-      finalTime = finalTime.toDate().toString();
-      newRows.value.push({ email, initialTime, finalTime });
+      if (finalTime) {
+        finalTime = finalTime.toDate().toString();
+      } else {
+        finalTime = "In progess";
+      }
+
+      newRows.value.push({ email, initialTime, finalTime, day });
     });
     console.log(newRows.value[0]);
   } catch (error) {
@@ -90,6 +133,13 @@ onMounted(async () => {
   }
 });
 const columns = [
+  {
+    name: "day",
+    align: "center",
+    label: "day",
+    field: "day",
+    sortable: true,
+  },
   {
     name: "email",
     align: "center",
@@ -100,7 +150,7 @@ const columns = [
   { name: "initialTime", label: "Initial Time", field: "initialTime" },
   {
     name: "finalTime",
-    label: "Final Time",
+    label: "Day",
     field: "finalTime",
     sortable: true,
   },
