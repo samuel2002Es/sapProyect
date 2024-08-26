@@ -15,7 +15,7 @@
         <q-btn flat color="blue" @click="promptBasic = !promptBasic">New</q-btn>
       </div>
       <div class="q-gutter-xl row">
-        <LinkFormat v-for="link in links" :key="link.title" v-bind="link" />
+        <LinkFormat v-for="link in links" :key="link" v-bind="link" />
       </div>
     </section>
     <section>
@@ -283,16 +283,58 @@ const links = ref([
     link: "https://sap.sharepoint.com/:x:/r/teams/IDAKnowledgeHub-ExistingProcesses/_layouts/15/Doc.aspx?sourcedoc=%7B83745438-11C1-4D0B-A5D6-7519CB0B6EA2%7D&file=EMEA_MEE%20Checklist%20-%2029.10.2021.xlsb&action=default&mobileredirect=true&cid=1ce6da47-720f-4fd2-af8c-db396f11fa43&isSPOFile=1&clickparams=eyJBcHBOYW1lIjoiVGVhbXMtRGVza3RvcCIsIkFwcFZlcnNpb24iOiIyNy8yNDAyMjkyMDYwMiIsIkhhc0ZlZGVyYXRlZFVzZXIiOmZhbHNlfQ%3D%3D",
     target: "_blank",
   },
-    {
+  {
     title: "Hierarchy Tracker-Consolidated",
     caption: "Hierarchy Tracker-Consolidated",
     link: "https://sap.sharepoint.com/:x:/t/IDAKnowledgeHub-ExistingProcesses/Ec2GiVKi-j5Hu1LXrf37zCUBbWNr4NJor3V0hCsyknybOg?e=HQ9mRM",
     target: "_blank",
   },
-    {
+  {
     title: "Tax Type",
     caption: "Tax Type",
     link: "https://sap.sharepoint.com/:x:/t/IDM/EZIEHfJknGhOqs_wcbR-uqcBz3NOTRuUJ85uJW0Woj_iZw?e=80PwWA&CID=A0922361-2418-4C3C-B707-98C99D3EA3A6&wdLOR=cA2DA50B9-C911-42EA-99F5-CD571790921C&isSPOFile=1&clickparams=eyJBcHBOYW1lIjoiVGVhbXMtRGVza3RvcCIsIkFwcFZlcnNpb24iOiIyNy8yNDAzMjgyMTIwMCIsIkhhc0ZlZGVyYXRlZFVzZXIiOmZhbHNlfQ%3D%3D",
+    target: "_blank",
+  },
+  {
+    title: "Tax Brazil",
+    caption: "Tax page",
+    link: "https://solucoes.receita.fazenda.gov.br/Servicos/cnpjreva/cnpjreva_solicitacao.asp",
+    target: "_blank",
+  },
+  {
+    title: "Tax EU",
+    caption: "Tax page",
+    link: "https://www.secstates.com/%20%C2%A0,%20OpenCorporates%20::%20The%20Open%20Database%20Of%20The%20Corporate%20World",
+    target: "_blank",
+  },
+  {
+    title: "Tax France",
+    caption: "Tax page",
+    link: "https://www.societe.com/",
+    target: "_blank",
+  },
+  {
+    title: "Tax India",
+    caption: "Tax page",
+    link: "https://services.gst.gov.in/services/searchtp",
+    target: "_blank",
+  },
+  {
+    title: "Tax Germany",
+    caption: "Tax page",
+    link: "https://www.unternehmensregister.de/ureg/index.html;jsessionid=2D44105F7174289532B9972934B795B7.web04-1",
+    target: "_blank",
+  },
+  {
+    title: "Tax VIES europa",
+    caption: "Tax page",
+    link: "https://ec.europa.eu/taxation_customs/vies/#/vat-validation",
+    target: "_blank",
+  },
+  {
+    title: "Learning",
+    caption: "Learning",
+    link: "https://sap.plateau.com/learning/user/personal/landOnPortalHome.do",
     target: "_blank",
   },
 ]);
@@ -341,6 +383,29 @@ const Myowns = ref([
     link: "https://sapit-dataandintegration-prod-otter-edt-cic-frontend.cfapps.eu10-004.hana.ondemand.com/cic/index.html#/batchQueue",
     target: "_blank",
   },
-
+  {
+    title: "Vacation file",
+    caption: "Vacation file",
+    link: "https://sap-my.sharepoint.com/:x:/r/personal/jose_leopoldo_morales_luna_sap_com/_layouts/15/Doc.aspx?sourcedoc=%7BB76AA2D9-23BA-425E-B221-31F037E1097D%7D&file=vacation%20file%20.xlsx&wdLOR=c76EB06EB-BF9B-4766-A921-B4469F277CCC&fromShare=true&action=default&mobileredirect=true",
+    target: "_blank",
+  },
+  {
+    title: "Machine Translation Portal",
+    caption: "Machine Translation Portal",
+    link: "https://mtportal.int.sap/?rc=1",
+    target: "_blank",
+  },
+  {
+    title: "SOP",
+    caption: "Digital Library",
+    link: "https://dam.sap.com/mac/app/cs/dman/8c9300da2194bee5ebc0a8cc1a73d27052ab3033?assetUploadOpened=true",
+    target: "_blank",
+  },
+  {
+    title: "Chat GPT SAP",
+    caption: "Chat GPT SAP",
+    link: "https://gpt-demo.internal.cfapps.eu12.hana.ondemand.com/webclient/standalone/",
+    target: "_blank",
+  },
 ]);
 </script>

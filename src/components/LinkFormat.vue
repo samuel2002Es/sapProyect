@@ -1,5 +1,5 @@
 <template>
-  <q-item class="q-py-lg" clickable>
+  <q-item class="" clickable>
     <q-item-section v-if="props.icon" avatar>
       <q-icon
         :name="props.icon"
