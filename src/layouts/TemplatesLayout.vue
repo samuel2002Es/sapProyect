@@ -115,13 +115,12 @@ Please keep in mind that for Compliance purposes, screenshots, company website o
     expanded: false,
     titulo: "Follow up",
     texto: `
-Hi 
+Hello 
 
-Hope you are doing well 
+I hope you are doing fine.
+Continuing with your request, do you have any update? please let me know.
 
-Do you have any update?
-
-Thanks
+Thanks and Regards
 [name]
 Data services Bureau
 IDM Data Operations Excellence
