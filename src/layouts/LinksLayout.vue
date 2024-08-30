@@ -384,6 +384,12 @@ const Myowns = ref([
     target: "_blank",
   },
   {
+    title: "Customer Gobernance",
+    caption: "MDG",
+    link: "https://mdp.bss.net.sap/nwbc/?sap-nwbc-node=0000000221&sap-nwbc-context=03HM333035D633D5333674320082785F97807837CF78476767FF50BF104F3FF7785F57BF500343630388320323036390420363A04A10D3D000844D0C324A4A0A8AADF4F581C27A4EC1C17A7EAE217AC18E01562626C6FA79E549C9FAF6C58905BAC93999A97925B6402D6A206E4E625E7A69627AAAADAB1F00&sap-client=001&sap-language=EN&sap-nwbc-history_item=&sap-theme=sap_corbu",
+    target: "_blank",
+  },
+  {
     title: "Vacation file",
     caption: "Vacation file",
     link: "https://sap-my.sharepoint.com/:x:/r/personal/jose_leopoldo_morales_luna_sap_com/_layouts/15/Doc.aspx?sourcedoc=%7BB76AA2D9-23BA-425E-B221-31F037E1097D%7D&file=vacation%20file%20.xlsx&wdLOR=c76EB06EB-BF9B-4766-A921-B4469F277CCC&fromShare=true&action=default&mobileredirect=true",
@@ -405,6 +411,24 @@ const Myowns = ref([
     title: "Chat GPT SAP",
     caption: "Chat GPT SAP",
     link: "https://gpt-demo.internal.cfapps.eu12.hana.ondemand.com/webclient/standalone/",
+    target: "_blank",
+  },
+  {
+    title: "Scenario document ",
+    caption: "Scenario document",
+    link: "https://sap.sharepoint.com/:f:/r/teams/DSBOperations/Shared%20Documents/SHARE_DRIVE/DQF_Account,%20Contact%20and%20Tax/2024/Scenario%20Document?csf=1&web=1&e=aUny0J",
+    target: "_blank",
+  },
+  {
+    title: "Job console",
+    caption: "Job console",
+    link: "https://n1p.cloud.sap.corp/irj/portal",
+    target: "_blank",
+  },
+  {
+    title: "Tickets IT",
+    caption: "Tickets IT",
+    link: "https://sapit-home-prod-004.launchpad.cfapps.eu10.hana.ondemand.com/site#unifiedticketing-Display?sap-ui-app-id-hint=51a3f75c-7f9d-4c1a-8c3e-079e8e3e1a45/sites#Help-Inbox&/create/",
     target: "_blank",
   },
 ]);
