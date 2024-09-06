@@ -33,28 +33,28 @@
             rounded
             color="white"
             label="lunch"
-            @click="endday()"
+            @click="startlunch()"
           />
           <q-btn
             outline
             rounded
             color="white"
             label="lunch end"
-            @click="endday()"
+            @click="endlunch()"
           />
           <q-btn
             outline
             rounded
             color="white"
             label="breather"
-            @click="endday()"
+            @click="startbreather()"
           />
           <q-btn
             outline
             rounded
             color="white"
             label="breather end"
-            @click="endday()"
+            @click="endbreather()"
           />
         </div>
       </q-toolbar>
@@ -143,14 +143,16 @@ function getTime() {
   return today;
 }
 const startday = async () => {
-  // Add a new document in collection "cities"
-  //console.log(getTime());
   try {
     await setDoc(doc(db, "WorkDays", getMonth(), getToday(), store.user.uid), {
       email: store.user.email,
       user: store.user.uid,
       initialTime: getTime(),
       finalTime: null,
+      initiallunch: null,
+      finallunch: null,
+      initialbreather: null,
+      finalbreather: null,
     }).then(() => {
       $q.notify({
         icon: "done",
@@ -169,7 +171,6 @@ const startday = async () => {
 };
 const endday = async () => {
   try {
-    //"workdays", getMonth(),
     await updateDoc(
       doc(db, "WorkDays", getMonth(), getToday(), store.user.uid),
       {
@@ -179,7 +180,101 @@ const endday = async () => {
       $q.notify({
         icon: "done",
         color: "positive",
-        message: "Have an excellent day of work",
+        message: "Excellent work",
+      });
+    });
+  } catch (error) {
+    console.log(error);
+    $q.notify({
+      icon: "done",
+      color: "negative",
+      message: error,
+    });
+  }
+};
+const startlunch = async () => {
+  try {
+    await updateDoc(
+      doc(db, "WorkDays", getMonth(), getToday(), store.user.uid),
+      {
+        initiallunch: getTime(),
+      }
+    ).then(() => {
+      $q.notify({
+        icon: "done",
+        color: "positive",
+        message: "Bon Appétit",
+      });
+    });
+  } catch (error) {
+    console.log(error);
+    $q.notify({
+      icon: "done",
+      color: "negative",
+      message: error,
+    });
+  }
+};
+const endlunch = async () => {
+  // Add a new document in collection "cities"
+  //console.log(getTime());
+  try {
+    await updateDoc(
+      doc(db, "WorkDays", getMonth(), getToday(), store.user.uid),
+      {
+        finallunch: getTime(),
+      }
+    ).then(() => {
+      $q.notify({
+        icon: "done",
+        color: "positive",
+        message: "End lunch",
+      });
+    });
+  } catch (error) {
+    console.log(error);
+    $q.notify({
+      icon: "done",
+      color: "negative",
+      message: error,
+    });
+  }
+};
+const startbreather = async () => {
+  try {
+    await updateDoc(
+      doc(db, "WorkDays", getMonth(), getToday(), store.user.uid),
+      {
+        initialbreather: getTime(),
+      }
+    ).then(() => {
+      $q.notify({
+        icon: "done",
+        color: "positive",
+        message: "Breathe please",
+      });
+    });
+  } catch (error) {
+    console.log(error);
+    $q.notify({
+      icon: "done",
+      color: "negative",
+      message: error,
+    });
+  }
+};
+const endbreather = async () => {
+  try {
+    await updateDoc(
+      doc(db, "WorkDays", getMonth(), getToday(), store.user.uid),
+      {
+        endbreather: getTime(),
+      }
+    ).then(() => {
+      $q.notify({
+        icon: "done",
+        color: "positive",
+        message: "End breather",
       });
     });
   } catch (error) {
