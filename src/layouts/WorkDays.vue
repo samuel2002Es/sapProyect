@@ -98,14 +98,13 @@ function getMonth() {
 }
 onMounted(async () => {
   try {
-    //     firestore.doc(`/myCollection/myDocument`).getCollections().then(collections => {
-    //   for (let collection of collections) {
-    //     console.log(`Found collection with id: ${collection.id}`);
-    //   }
-    // });
-    ///WorkDays/August/2025-08-22
-    //const querySnapshot = await getDocs(collection(db, "WorkDays", "MES", "FECHA"));
-    //la collection
+//     const { collection, getDocs } = require("firebase/firestore");
+// // Query a reference to a subcollection
+// const querySnapshot = await getDocs(collection(db, "cities", "SF", "landmarks"));
+// querySnapshot.forEach((doc) => {
+//   // doc.data() is never undefined for query doc snapshots
+//   console.log(doc.id, " => ", doc.data());
+// });
     days.value.push(getToday(true));
     const day = getToday();
     const querySnapshot = await getDocs(
