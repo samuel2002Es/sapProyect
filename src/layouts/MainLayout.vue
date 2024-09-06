@@ -28,6 +28,34 @@
             label="End Day"
             @click="endday()"
           />
+          <q-btn
+            outline
+            rounded
+            color="white"
+            label="lunch"
+            @click="endday()"
+          />
+          <q-btn
+            outline
+            rounded
+            color="white"
+            label="lunch end"
+            @click="endday()"
+          />
+          <q-btn
+            outline
+            rounded
+            color="white"
+            label="breather"
+            @click="endday()"
+          />
+          <q-btn
+            outline
+            rounded
+            color="white"
+            label="breather end"
+            @click="endday()"
+          />
         </div>
       </q-toolbar>
     </q-header>
@@ -85,7 +113,7 @@ onMounted(() => {
 defineOptions({
   name: "MainLayout",
 });
-function getToday(format) {
+function getToday() {
   const today = new Date();
   const month = String(today.getMonth() + 1).padStart(2, "0");
   return `${today.getFullYear()}-${month}-${today.getDate()}`;

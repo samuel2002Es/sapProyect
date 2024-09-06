@@ -24,9 +24,8 @@
 import { ref, onMounted, watch } from "vue";
 import { doc, getDocs, collection } from "firebase/firestore";
 import { db } from "src/boot/firebase";
-const days = ref([getToday(true)]);
+const days = ref([]);
 const newRows = ref([]);
-let carros = [[{}], [{}]];
 watch(days, async () => {
   //console.log("selecciono algo nuevo", days.value);
   //arreglo = days.value.filter((i) => i !== getToday(true)); // filtramos
@@ -71,10 +70,11 @@ watch(days, async () => {
 function getToday(format) {
   const today = new Date();
   const month = String(today.getMonth() + 1).padStart(2, "0");
+  const day = String(today.getDate()).padStart(2, "0");
   if (format) {
-    return `${today.getFullYear()}/${month}/${today.getDate()}`;
+    return `${today.getFullYear()}/${month}/${day}`;
   } else {
-    return `${today.getFullYear()}-${month}-${today.getDate()}`;
+    return today.toISOString().split("T")[0];
   }
 }
 function getMonth() {
@@ -106,6 +106,7 @@ onMounted(async () => {
     ///WorkDays/August/2025-08-22
     //const querySnapshot = await getDocs(collection(db, "WorkDays", "MES", "FECHA"));
     //la collection
+    days.value.push(getToday(true));
     const day = getToday();
     const querySnapshot = await getDocs(
       collection(db, "WorkDays", getMonth(), day)

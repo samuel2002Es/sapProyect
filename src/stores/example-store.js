@@ -79,12 +79,9 @@ export const useCounterStore = defineStore("counter", () => {
   function getToday() {
     const today = new Date();
     const month = String(today.getMonth() + 1).padStart(2, "0");
-    ticketsOutput.value.fecha_hoyf = `${
-      today.getFullYear() + 1
-    }-${month}-${today.getDate()}`;
-    ticketsOutput.value.fecha_hoyi = `${
-      today.getFullYear() + 1
-    }-${month}-${today.getDate()}`;
+    ticketsOutput.value.fecha_hoyf = today.toISOString().split("T")[0];
+    ticketsOutput.value.fecha_hoyi = today.toISOString().split("T")[0];
+    console.log(ticketsOutput.value.fecha_hoyi);
   }
   async function name() {
     await users
