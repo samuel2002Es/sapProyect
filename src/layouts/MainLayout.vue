@@ -269,7 +269,7 @@ const endbreather = async () => {
     await updateDoc(
       doc(db, "WorkDays", getMonth(), getToday(), store.user.uid),
       {
-        endbreather: getTime(),
+        finalbreather: getTime(),
       }
     ).then(() => {
       $q.notify({

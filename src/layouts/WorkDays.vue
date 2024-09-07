@@ -98,13 +98,13 @@ function getMonth() {
 }
 onMounted(async () => {
   try {
-//     const { collection, getDocs } = require("firebase/firestore");
-// // Query a reference to a subcollection
-// const querySnapshot = await getDocs(collection(db, "cities", "SF", "landmarks"));
-// querySnapshot.forEach((doc) => {
-//   // doc.data() is never undefined for query doc snapshots
-//   console.log(doc.id, " => ", doc.data());
-// });
+    //     const { collection, getDocs } = require("firebase/firestore");
+    // // Query a reference to a subcollection
+    // const querySnapshot = await getDocs(collection(db, "cities", "SF", "landmarks"));
+    // querySnapshot.forEach((doc) => {
+    //   // doc.data() is never undefined for query doc snapshots
+    //   console.log(doc.id, " => ", doc.data());
+    // });
     days.value.push(getToday(true));
     const day = getToday();
     const querySnapshot = await getDocs(
@@ -115,15 +115,51 @@ onMounted(async () => {
       // doc.data() is never undefined for query doc snapshots
       // doc.data().finalTime.toDate();
       console.log(doc.data());
-      let { email, initialTime, finalTime } = doc.data();
+      let {
+        email,
+        initialTime,
+        finalTime,
+        initialbreather,
+        finalbreather,
+        initiallunch,
+        finallunch,
+      } = doc.data();
       initialTime = initialTime.toDate().toString();
       if (finalTime) {
         finalTime = finalTime.toDate().toString();
       } else {
         finalTime = "In progess";
       }
-
-      newRows.value.push({ email, initialTime, finalTime, day });
+      if (initiallunch) {
+        initiallunch = initiallunch.toDate().toString();
+      } else {
+        initiallunch = "In progess";
+      }
+      if (finallunch) {
+        finallunch = finallunch.toDate().toString();
+      } else {
+        finallunch = "In progess";
+      }
+      if (initialbreather) {
+        initialbreather = initialbreather.toDate().toString();
+      } else {
+        initialbreather = "In progess";
+      }
+      if (finalbreather) {
+        finalbreather = finalbreather.toDate().toString();
+      } else {
+        finalbreather = "In progess";
+      }
+      newRows.value.push({
+        email,
+        initialTime,
+        finalTime,
+        day,
+        initialbreather,
+        finalbreather,
+        initiallunch,
+        finallunch,
+      });
     });
     console.log(newRows.value[0]);
   } catch (error) {
@@ -145,12 +181,31 @@ const columns = [
     field: "email",
     sortable: true,
   },
-  { name: "initialTime", label: "Initial Time", field: "initialTime" },
+  { name: "initialTime", label: "Initial Day", field: "initialTime" },
   {
     name: "finalTime",
-    label: "Day",
+    label: "Final Day",
     field: "finalTime",
-    sortable: true,
+  },
+  {
+    name: "initiallunch",
+    label: "Initial lunch",
+    field: "initiallunch",
+  },
+  {
+    name: "finallunch",
+    label: "final lunch",
+    field: "finallunch",
+  },
+  {
+    name: "initialbreather",
+    label: "Initial breather",
+    field: "initialbreather",
+  },
+  {
+    name: "finalbreather",
+    label: "Final breather",
+    field: "finalbreather",
   },
 ];
 
