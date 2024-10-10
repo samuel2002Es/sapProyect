@@ -94,7 +94,14 @@ const store = useCounterStore();
 
 import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 const isLoggedin = ref(false);
-import { doc, setDoc, updateDoc } from "firebase/firestore";
+import {
+  doc,
+  setDoc,
+  getDocs,
+  collection,
+  updateDoc,
+  getDoc,
+} from "firebase/firestore";
 import { db } from "src/boot/firebase";
 import { useQuasar } from "quasar";
 
@@ -143,147 +150,236 @@ function getTime() {
   //checar si esto funciona
   return today;
 }
+
+let valueinitialTime;
+let valuefinalTime;
+let valueinitiallunch;
+let valuefinallunch;
+let valueinitialbreather;
+let valuefinalbreather;
+const consultexistdata = async () => {
+  const docRef = doc(db, "WorkDays", getMonth(), getToday(), store.user.uid);
+  const docSnap = await getDoc(docRef);
+  valueinitialbreather = docSnap.data().initialbreather;
+  valuefinalbreather = docSnap.data().finalbreather;
+  return {
+    docExist,
+    valueinitialTime,
+    valuefinalTime,
+    valueinitiallunch,
+    valuefinallunch,
+    valueinitialbreather,
+    valuefinalbreather,
+  };
+};
 const startday = async () => {
-  try {
-    await setDoc(doc(db, "WorkDays", getMonth(), getToday(), store.user.uid), {
-      email: store.user.email,
-      user: store.user.uid,
-      initialTime: getTime(),
-      finalTime: null,
-      initiallunch: null,
-      finallunch: null,
-      initialbreather: null,
-      finalbreather: null,
-    }).then(() => {
+  const docRef = doc(db, "WorkDays", getMonth(), getToday(), store.user.uid);
+  const docSnap = await getDoc(docRef);
+  const docExist = docSnap.exists();
+  if (!docExist) {
+    try {
+      await setDoc(
+        doc(db, "WorkDays", getMonth(), getToday(), store.user.uid),
+        {
+          email: store.user.email,
+          user: store.user.uid,
+          initialTime: getTime(),
+          finalTime: null,
+          initiallunch: null,
+          finallunch: null,
+          initialbreather: null,
+          finalbreather: null,
+        }
+      ).then(() => {
+        $q.notify({
+          icon: "done",
+          color: "positive",
+          message: "Have an excellent day of work",
+        });
+      });
+    } catch (error) {
+      console.log(error);
       $q.notify({
         icon: "done",
-        color: "positive",
-        message: "Have an excellent day of work",
+        color: "negative",
+        message: error,
       });
-    });
-  } catch (error) {
-    console.log(error);
+    }
+  } else {
     $q.notify({
       icon: "done",
       color: "negative",
-      message: error,
+      message: "the information about the start day has been sent before",
     });
   }
 };
 const endday = async () => {
-  try {
-    await updateDoc(
-      doc(db, "WorkDays", getMonth(), getToday(), store.user.uid),
-      {
-        finalTime: getTime(),
-      }
-    ).then(() => {
+  const docRef = doc(db, "WorkDays", getMonth(), getToday(), store.user.uid);
+  const docSnap = await getDoc(docRef);
+  const valuefinalTime = docSnap.data().finalTime;
+  if (!valuefinalTime) {
+    try {
+      await updateDoc(
+        doc(db, "WorkDays", getMonth(), getToday(), store.user.uid),
+        {
+          finalTime: getTime(),
+        }
+      ).then(() => {
+        $q.notify({
+          icon: "done",
+          color: "positive",
+          message: "Excellent work",
+        });
+      });
+    } catch (error) {
+      console.log(error);
       $q.notify({
         icon: "done",
-        color: "positive",
-        message: "Excellent work",
+        color: "negative",
+        message: error,
       });
-    });
-  } catch (error) {
-    console.log(error);
+    }
+  } else {
     $q.notify({
       icon: "done",
       color: "negative",
-      message: error,
+      message: "the information about the end day has been sent before",
     });
   }
 };
 const startlunch = async () => {
-  try {
-    await updateDoc(
-      doc(db, "WorkDays", getMonth(), getToday(), store.user.uid),
-      {
-        initiallunch: getTime(),
-      }
-    ).then(() => {
+  const docRef = doc(db, "WorkDays", getMonth(), getToday(), store.user.uid);
+  const docSnap = await getDoc(docRef);
+  const valueinitiallunch = docSnap.data().initiallunch;
+  if (!valueinitiallunch) {
+    try {
+      await updateDoc(
+        doc(db, "WorkDays", getMonth(), getToday(), store.user.uid),
+        {
+          initiallunch: getTime(),
+        }
+      ).then(() => {
+        $q.notify({
+          icon: "done",
+          color: "positive",
+          message: "Bon Appétit",
+        });
+      });
+    } catch (error) {
+      console.log(error);
       $q.notify({
         icon: "done",
-        color: "positive",
-        message: "Bon Appétit",
+        color: "negative",
+        message: error,
       });
-    });
-  } catch (error) {
-    console.log(error);
+    }
+  } else {
     $q.notify({
       icon: "done",
       color: "negative",
-      message: error,
+      message: "the information about the start lunch has been sent before",
     });
   }
 };
 const endlunch = async () => {
-  // Add a new document in collection "cities"
-  //console.log(getTime());
-  try {
-    await updateDoc(
-      doc(db, "WorkDays", getMonth(), getToday(), store.user.uid),
-      {
-        finallunch: getTime(),
-      }
-    ).then(() => {
+  const docRef = doc(db, "WorkDays", getMonth(), getToday(), store.user.uid);
+  const docSnap = await getDoc(docRef);
+  const valuefinallunch = docSnap.data().finallunch;
+  if (!valuefinallunch) {
+    try {
+      await updateDoc(
+        doc(db, "WorkDays", getMonth(), getToday(), store.user.uid),
+        {
+          finallunch: getTime(),
+        }
+      ).then(() => {
+        $q.notify({
+          icon: "done",
+          color: "positive",
+          message: "End lunch",
+        });
+      });
+    } catch (error) {
+      console.log(error);
       $q.notify({
         icon: "done",
-        color: "positive",
-        message: "End lunch",
+        color: "negative",
+        message: error,
       });
-    });
-  } catch (error) {
-    console.log(error);
+    }
+  } else {
     $q.notify({
       icon: "done",
       color: "negative",
-      message: error,
+      message: "the information about the final lunch has been sent before",
     });
   }
 };
 const startbreather = async () => {
-  try {
-    await updateDoc(
-      doc(db, "WorkDays", getMonth(), getToday(), store.user.uid),
-      {
-        initialbreather: getTime(),
-      }
-    ).then(() => {
+  const docRef = doc(db, "WorkDays", getMonth(), getToday(), store.user.uid);
+  const docSnap = await getDoc(docRef);
+  const valueinitialbreather = docSnap.data().initialbreather;
+  if (!valueinitialbreather) {
+    try {
+      await updateDoc(
+        doc(db, "WorkDays", getMonth(), getToday(), store.user.uid),
+        {
+          initialbreather: getTime(),
+        }
+      ).then(() => {
+        $q.notify({
+          icon: "done",
+          color: "positive",
+          message: "Breathe please",
+        });
+      });
+    } catch (error) {
+      console.log(error);
       $q.notify({
         icon: "done",
-        color: "positive",
-        message: "Breathe please",
+        color: "negative",
+        message: error,
       });
-    });
-  } catch (error) {
-    console.log(error);
+    }
+  } else {
     $q.notify({
       icon: "done",
       color: "negative",
-      message: error,
+      message: "the information about the initial brather has been sent before",
     });
   }
 };
 const endbreather = async () => {
-  try {
-    await updateDoc(
-      doc(db, "WorkDays", getMonth(), getToday(), store.user.uid),
-      {
-        finalbreather: getTime(),
-      }
-    ).then(() => {
+  const docRef = doc(db, "WorkDays", getMonth(), getToday(), store.user.uid);
+  const docSnap = await getDoc(docRef);
+  const valuefinalbreather = docSnap.data().finalbreather;
+  if (!valuefinalbreather) {
+    try {
+      await updateDoc(
+        doc(db, "WorkDays", getMonth(), getToday(), store.user.uid),
+        {
+          finalbreather: getTime(),
+        }
+      ).then(() => {
+        $q.notify({
+          icon: "done",
+          color: "positive",
+          message: "End breather",
+        });
+      });
+    } catch (error) {
+      console.log(error);
       $q.notify({
         icon: "done",
-        color: "positive",
-        message: "End breather",
+        color: "negative",
+        message: error,
       });
-    });
-  } catch (error) {
-    console.log(error);
+    }
+  } else {
     $q.notify({
       icon: "done",
       color: "negative",
-      message: error,
+      message: "the information about the final brather has been sent before",
     });
   }
 };
