@@ -1,5 +1,4 @@
 <template>
-  {{ newRows }}
   <div class="q-pa-md">
     <q-btn
       class="q-mb-md"
