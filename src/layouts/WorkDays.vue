@@ -50,20 +50,57 @@ watch(days, async () => {
       "December",
     ];
     let mesNombre = nombresMeses[mesNumero - 1];
-    console.log(mesNombre);
+    //console.log(mesNombre);
     const querySnapshot = await getDocs(
       collection(db, "WorkDays", mesNombre, fechaFormatoNuevo)
     );
     querySnapshot.forEach((doc) => {
       console.log("informacion obtenida", doc.data());
-      let { email, initialTime, finalTime } = doc.data();
+      let {
+        email,
+        initialTime,
+        finalTime,
+        initiallunch,
+        finallunch,
+        initialbreather,
+        finalbreather,
+      } = doc.data();
       initialTime = initialTime.toDate().toString();
       if (finalTime) {
         finalTime = finalTime.toDate().toString();
       } else {
         finalTime = "In progess";
       }
-      newRows.value.push({ email, initialTime, finalTime, day: daysarray[i] });
+      if (initiallunch) {
+        initiallunch = initiallunch.toDate().toString();
+      } else {
+        initiallunch = "In progess";
+      }
+      if (finallunch) {
+        finallunch = finallunch.toDate().toString();
+      } else {
+        finallunch = "In progess";
+      }
+      if (initialbreather) {
+        initialbreather = initialbreather.toDate().toString();
+      } else {
+        initialbreather = "In progess";
+      }
+      if (finalbreather) {
+        finalbreather = finalbreather.toDate().toString();
+      } else {
+        finalbreather = "In progess";
+      }
+      newRows.value.push({
+        email,
+        initialTime,
+        finalTime,
+        day: daysarray[i],
+        initiallunch,
+        finallunch,
+        initialbreather,
+        finalbreather,
+      });
     });
   }
 });
@@ -110,7 +147,7 @@ onMounted(async () => {
     const querySnapshot = await getDocs(
       collection(db, "WorkDays", getMonth(), day)
     );
-    console.log("samuel espinoza", querySnapshot);
+    //console.log("samuel espinoza", querySnapshot);
     querySnapshot.forEach((doc) => {
       // doc.data() is never undefined for query doc snapshots
       // doc.data().finalTime.toDate();
@@ -161,9 +198,9 @@ onMounted(async () => {
         finallunch,
       });
     });
-    console.log(newRows.value[0]);
+    //console.log(newRows.value[0]);
   } catch (error) {
-    console.log("aqui andamos", error);
+    //console.log("aqui andamos", error);
   }
 });
 const columns = [
